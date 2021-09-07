@@ -8,12 +8,12 @@ public class App {
     public static void main(String[] args) {
         Nave n1 = new Nave();
         Nave n2 = new Nave();
-        if (n1 == n2)
-            n1.setVida(35);
-        else
-            n2.setVida(40);
-        n1 = n2;
+        Nave n3 = new Nave();
 
-        System.out.println(n2.getVida() + " " + n1.getVida());
+        n2.trocaVida(n3);
+
+        System.out.println(n2.cont);
+        n1.mostraInfo();
+        n2.mostraInfo();
     }
 }
