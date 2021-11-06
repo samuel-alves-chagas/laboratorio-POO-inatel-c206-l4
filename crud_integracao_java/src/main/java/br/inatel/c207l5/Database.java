@@ -28,12 +28,37 @@ public class Database {
 
   private boolean check = false; // Atributo interno para retorno de métodos
 
-  public void conect() {
+  public void connect() {
     try {
       connection = DriverManager.getConnection(url, user, password);
       System.out.println("Conexão feita com sucesso: " + connection);
     } catch (SQLException e) {
       System.out.println("Erro de conexão: " + e.getMessage());
     }
+  }
+
+  public boolean insertUser(User user) {
+    connect();
+
+    String sql = "INSERT INTO usuario(nome, cpf) VALUES (?, ?)";
+    try {
+      pst = connection.prepareStatement(sql);
+      pst.setString(1, user.getNome());
+      pst.setString(2, user.getCpf());
+      pst.execute();
+
+      check = true;
+    } catch (SQLException e) {
+      System.out.println("Erro de operacao: " + e.getMessage());
+      check = false;
+    } finally {
+      try {
+        connection.close();
+        pst.close();
+      } catch (SQLException e) {
+        System.out.println("Erro ao finalizar conexão: " + e.getMessage());
+      }
+    }
+    return check;
   }
 }
