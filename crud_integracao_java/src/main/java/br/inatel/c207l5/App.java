@@ -14,7 +14,7 @@ public class App {
         // db.insertUser(user3);
         // db.insertUser(user3);
         db.ListUser();
-        db.updateUser(1, "Denilson");
+        db.deleteUser(1);
         db.ListUser();
 
     }

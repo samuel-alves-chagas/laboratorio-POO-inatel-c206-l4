@@ -121,4 +121,27 @@ public class Database {
     }
     return check;
   }
+
+  public boolean deleteUser(int id) {
+    connect();
+    String sql = "DELETE FROM usuario WHERE id=?";
+
+    try {
+      pst = connection.prepareStatement(sql);
+      pst.setInt(1, id);
+      pst.execute();
+      check = true;
+    } catch (SQLException e) {
+      System.out.println("Erro de operacao: " + e.getMessage());
+      check = false;
+    } finally {
+      try {
+        connection.close();
+        pst.close();
+      } catch (SQLException e) {
+        System.out.println("Erro ao finalizar conexão: " + e.getMessage());
+      }
+    }
+    return check;
+  }
 }
